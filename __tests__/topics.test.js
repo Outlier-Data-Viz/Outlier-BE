@@ -50,6 +50,18 @@ describe('topic crud routes', () => {
     });
   });
 
+  it('deletes topic by id && returns obj', async () => {
+    await Topic.insert(testTopic);
+
+    const res = await request(app)
+      .delete('/api/v1/topics/1');
+
+    expect(res.body).toEqual({
+      id: expect.any(String),
+      name: 'interesting'
+    });
+  });
+
   afterAll(() => {
     pool.end();
   });
