@@ -19,8 +19,8 @@ const testUser = {
 };
 
 describe('user crud routes', () => {
-  beforeEach(() => {
-    return setup(pool);
+  beforeEach(async () => {
+    await setup(pool);
   });
 
   it('posts user to db', async () => {
@@ -38,6 +38,8 @@ describe('user crud routes', () => {
   });
 
   it('gets all users from db', async () => {
+    await User.insert(testUser);
+    
     return await request(app)
       .get('/api/v1/users')
       .then((res) => {
