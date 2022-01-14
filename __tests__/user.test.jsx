@@ -61,7 +61,6 @@ describe('user crud routes', () => {
         avatar: 'test-2.png',
       });
 
-    console.log(res.body);
     expect(res.body).toEqual({
       id: expect.any(String),
       email: 'test@email.com',
@@ -69,10 +68,10 @@ describe('user crud routes', () => {
       avatar: 'test-2.png',
     });
   });
-
+    
   it('deletes user && returns deleted obj', async () => {
     await User.insert(testUser);
-
+      
     await request(app)
       .put('/api/v1/users/1')
       .send({
@@ -80,8 +79,9 @@ describe('user crud routes', () => {
         avatar: 'test-2.png',
       });
     const res = await request(app)
-      .delete('/user/1');
-
+      .delete('/api/v1/users/1');
+      
+    console.log('@ DELETE TEST', res.body);
     expect(res.body).toEqual({
       id: expect.any(String),
       email: 'test@email.com',
