@@ -57,12 +57,10 @@ describe('user crud routes', () => {
     const res = await request(app)
       .put('/api/v1/users/1')
       .send({
-        // id: 1,
-        // email: testUser.email,
         username: 'test-user-put',
         avatar: 'test-2.png',
       });
-    // eslint-disable-next-line no-console
+
     console.log(res.body);
     expect(res.body).toEqual({
       id: expect.any(String),
@@ -70,5 +68,29 @@ describe('user crud routes', () => {
       username: 'test-user-put',
       avatar: 'test-2.png',
     });
+  });
+
+  it('deletes user && returns deleted obj', async () => {
+    await User.insert(testUser);
+
+    await request(app)
+      .put('/api/v1/users/1')
+      .send({
+        username: 'test-user-put',
+        avatar: 'test-2.png',
+      });
+    const res = await request(app)
+      .delete('/user/1');
+
+    expect(res.body).toEqual({
+      id: expect.any(String),
+      email: 'test@email.com',
+      username: 'test-user-put',
+      avatar: 'test-2.png',
+    });
+  });
+
+  afterAll(() => {
+    pool.end();
   });
 });
