@@ -35,7 +35,20 @@ describe('favorites routes', () => {
       .then((res) => {
         expect(res.body).toEqual(expect.any(Array));
       });
-  })
+  });
+
+  it('gets favorite by id', async () => {
+    await Favorite.insert(insertFavorite);
+
+    const res = await request(app).get('/api/v1/favorite/1');
+
+    expect(res.body).toEqual({
+      id: expect.any(String),
+      image: expect.any(String),
+      user: { userId: expect.any(String) }
+    });
+  });
+
 
   afterAll(() => {
     pool.end();
