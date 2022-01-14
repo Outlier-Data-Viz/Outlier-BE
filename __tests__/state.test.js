@@ -5,8 +5,9 @@ const app = require('../lib/app');
 const State = require('../lib/models/State');
 
 const insertState = {
-  stateName: 'Alabama',
-  abrv: 'AL'
+  stateName: 'new state',
+  abrv: 'NS',
+  totalPop: '1111111',
 };
 
 describe('state routes', () => {
@@ -15,10 +16,7 @@ describe('state routes', () => {
   });
 
   it('posts state to db', async () => {
-    const res = await request(app).post('/api/v1/state/create').send({
-      stateName: 'Alabama',
-      abrv: 'AL',
-    });
+    const res = await request(app).post('/api/v1/state/create').send(insertState);
     expect(res.body).toEqual({
       ...insertState,
     });
@@ -35,12 +33,13 @@ describe('state routes', () => {
   });
 
   it('gets a state by name', async() => {
+    await State.insert(insertState);
+
     return await request(app)
-      .get('/api/v1/state/alabama')
+      .get('/api/v1/state/new%20state')
       .then((res) => {
         expect(res.body).toEqual({
-          stateName: 'alabama',
-          abrv: 'AL'
+          ...insertState
         });
       });
   });
