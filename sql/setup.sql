@@ -15,13 +15,14 @@ CREATE TABLE users (
   -- FOREIGN KEY (email) REFERENCES auth(email)
 );
 
-INSERT INTO users (email) VALUES('test@email.com');
+
 
 CREATE TABLE states (
-  state_id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-  state_name TEXT NOT NULL,
+  state_name TEXT NOT NULL PRIMARY KEY,
   abrv TEXT NOT NULL
 );
+
+INSERT INTO users (email) VALUES('test@email.com');
 
 INSERT INTO states (state_name, abrv) 
 VALUES
@@ -75,3 +76,9 @@ VALUES
 ('west virginia', 'WV'),
 ('wisconsin', 'WI'),
 ('wyoming', 'WY');
+
+-- CREATE TABLE favorites (
+--   id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+--   email TEXT NOT NULL,
+--   FOREIGN KEY (email) REFERENCES users(email)
+-- );
