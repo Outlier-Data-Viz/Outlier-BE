@@ -5,6 +5,15 @@ const app = require('../lib/app');
 const User = require('../lib/models/User');
 
 
+jest.mock('../lib/middleware/ensure-auth', () => {
+  return (req, res, next) => {
+    req.user = {
+      email: 'test@email.com',
+    };
+    next();
+  };
+});
+
 const testUser = {
   email: 'test@email.com',  
 };
@@ -48,15 +57,17 @@ describe('user crud routes', () => {
     const res = await request(app)
       .put('/api/v1/users/1')
       .send({
-        email: testUser.email,
+        // id: 1,
+        // email: testUser.email,
         username: 'test-user-put',
         avatar: 'test-2.png',
       });
-
+    // eslint-disable-next-line no-console
+    console.log(res.body);
     expect(res.body).toEqual({
       id: expect.any(String),
-      username: 'test-user-put',
       email: 'test@email.com',
+      username: 'test-user-put',
       avatar: 'test-2.png',
     });
   });
