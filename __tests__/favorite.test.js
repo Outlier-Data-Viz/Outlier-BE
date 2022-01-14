@@ -49,6 +49,18 @@ describe('favorites routes', () => {
     });
   });
 
+  it('deletes favorite by id and returns obj', async () => {
+    await Favorite.insert(insertFavorite);
+
+    const res = await request(app)
+      .delete('/api/v1/favorite/1');
+    
+    expect(res.body).toEqual({
+      id: expect.any(String),
+      image: expect.any(String),
+      user: { userId: expect.any(String) }
+    });
+  });
 
   afterAll(() => {
     pool.end();
