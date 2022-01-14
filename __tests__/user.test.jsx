@@ -51,6 +51,19 @@ describe('user crud routes', () => {
       });
   });
 
+  it('gets user by id', async () => {
+    await User.insert(testUser);
+
+    const res = await request(app).get('/api/v1/users/1');
+
+    expect(res.body).toEqual({
+      id: expect.any(String),
+      email: 'test@email.com',
+      username: null,
+      avatar: null
+    });
+  });
+
   it('updates a user by id', async () => {
     await User.insert(testUser);
 
@@ -80,8 +93,7 @@ describe('user crud routes', () => {
       });
     const res = await request(app)
       .delete('/api/v1/users/1');
-      
-    console.log('@ DELETE TEST', res.body);
+
     expect(res.body).toEqual({
       id: expect.any(String),
       email: 'test@email.com',
