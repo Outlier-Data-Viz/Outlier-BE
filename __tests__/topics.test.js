@@ -2,6 +2,7 @@ const pool = require('../lib/utils/pool');
 const setup = require('../data/setup');
 const request = require('supertest');
 const app = require('../lib/app');
+const Topic = require('../lib/models/Topics');
 
 const testTopic = {
   name: 'interesting'
@@ -23,6 +24,19 @@ describe('topic crud routes', () => {
       id: expect.any(String),
       name: 'interesting'
     });
+  });
+
+  it('gets all topics from db', async () => {
+    await Topic.insert(testTopic);
+
+    return await request(app)
+      .get('/api/v1/topics')
+      .then((res) => {
+        expect(res.body).toEqual([{
+          id: expect.any(String),
+          name: 'interesting'
+        }]);
+      });
   });
 
 
