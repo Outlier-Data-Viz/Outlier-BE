@@ -39,6 +39,16 @@ describe('topic crud routes', () => {
       });
   });
 
+  it('gets topic by id', async () => {
+    await Topic.insert(testTopic);
+
+    const res = await request(app).get('/api/v1/topics/1');
+
+    expect(res.body).toEqual({
+      id: expect.any(String),
+      name: 'interesting'
+    });
+  });
 
   afterAll(() => {
     pool.end();
