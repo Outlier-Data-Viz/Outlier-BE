@@ -3,14 +3,14 @@ const setup = require('../data/setup');
 const request = require('supertest');
 const app = require('../lib/app');
 
-const insertState = {
-  stateName: 'Alabama',
-  abrv: 'AL'
-};
+// const insertState = {
+//   stateName: 'Alabama',
+//   abrv: 'AL'
+// };
 
 describe('state routes', () => {
-  beforeEach(() => {
-    return setup(pool);
+  beforeEach(async () => {
+    await setup(pool);
   });
 
   // it('posts state to db', async () => {
@@ -51,6 +51,9 @@ describe('state routes', () => {
         });
       });
   });
-
+  
+  afterAll(() => {
+    pool.end();
+  });
 
 });
