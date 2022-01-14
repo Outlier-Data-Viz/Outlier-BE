@@ -43,12 +43,20 @@ describe('user crud routes', () => {
     return await request(app)
       .get('/api/v1/users')
       .then((res) => {
-        expect(res.body).toEqual([{
-          id: expect.any(String),
-          email: 'test@email.com',
-          username: null,
-          avatar: null
-        }]
+        expect(res.body).toEqual([
+          {
+            id: expect.any(String),
+            email: 'test@email.com',
+            username: null,
+            avatar: null
+          },
+          {
+            id: expect.any(String),
+            email: 'test@email.com',
+            username: null,
+            avatar: null
+          }
+        ]
         );
       });
   });
