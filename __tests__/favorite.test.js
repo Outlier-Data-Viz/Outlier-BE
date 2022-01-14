@@ -2,6 +2,7 @@ const pool = require('../lib/utils/pool');
 const setup = require('../data/setup');
 const app = require('../lib/app');
 const request = require('supertest');
+const Favorite = require('../lib/models/Favorite');
 
 const insertFavorite = {
   image: 'example.png',
@@ -25,6 +26,16 @@ describe('favorites routes', () => {
       // topic: { topicId: expect.any(String) }
     });
   });
+
+  it('gets all favorites', async () => {
+    await Favorite.insert(insertFavorite);
+
+    return await request(app)
+      .get('/api/v1/favorite')
+      .then((res) => {
+        expect(res.body).toEqual(expect.any(Array));
+      });
+  })
 
   afterAll(() => {
     pool.end();
