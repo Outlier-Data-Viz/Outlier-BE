@@ -2,6 +2,7 @@
 DROP TABLE IF EXISTS users CASCADE;
 DROP TABLE IF EXISTS topics CASCADE;
 DROP TABLE IF EXISTS states;
+DROP TABLE IF EXISTS resources CASCADE; 
 
 -- CREATE TABLE auth (
 --   id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
@@ -89,3 +90,13 @@ VALUES
 --   FOREIGN KEY (email) REFERENCES users(email)
 -- );
 
+
+CREATE TABLE resources (
+  resource_id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+  resource_name TEXT NOT NULL,
+  resource_URL TEXT NOT NULL,
+  state_abrv TEXT NOT NULL,
+  FOREIGN KEY (state_abrv) REFERENCES states(state_abrv);
+  topics_id TEXT NOT NULL,
+  FOREIGN KEY (topics_id) REFERENCES topics(topics_id);
+);
