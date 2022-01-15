@@ -27,14 +27,27 @@ describe('additional data routes', () => {
     });
   });
 
-  it('gets all favorites', async () => {
+  it('gets all additional data from db', async () => {
     await Data.insert(insertData);
 
     return await request(app)
-      .get('/api/v1/favorite')
+      .get('/api/v1/data')
       .then((res) => {
         expect(res.body).toEqual(expect.any(Array));
       });
+  });
+
+  it('gets additional data by id', async () => {
+    await Data.insert(insertData);
+
+    const res = await request(app).get('/api/v1/data/1');
+
+    expect(res.body).toEqual({
+      id: expect.any(String),
+      data: expect.any(String),
+      state: { state: expect.any(String) },
+      topic: { topic: expect.any(String) },
+    });
   });
 });
 
