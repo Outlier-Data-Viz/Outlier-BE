@@ -1,8 +1,8 @@
 -- DROP TABLE IF EXISTS auth CASCADE;
 DROP TABLE IF EXISTS users CASCADE;
 DROP TABLE IF EXISTS topics CASCADE;
-DROP TABLE IF EXISTS states;
-DROP TABLE IF EXISTS resources CASCADE; 
+DROP TABLE IF EXISTS states CASCADE;
+DROP TABLE IF EXISTS resources; 
 
 -- CREATE TABLE auth (
 --   id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
@@ -24,9 +24,20 @@ CREATE TABLE topics (
   name TEXT NOT NULL
 );
 
+
 CREATE TABLE states (
   state_name TEXT NOT NULL PRIMARY KEY,
-  abrv TEXT NOT NULL
+  abrv TEXT UNIQUE NOT NULL
+);
+
+CREATE TABLE resources (
+  resource_id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+  resource_name TEXT NOT NULL,
+  resource_URL TEXT NOT NULL,
+  state_abrv TEXT NOT NULL,
+  FOREIGN KEY (state_abrv) REFERENCES states(abrv)
+  -- topics_id TEXT NOT NULL,
+  -- FOREIGN KEY (topics_id) REFERENCES topics(id)
 );
 
 INSERT INTO users (email) VALUES('test@email.com');
@@ -90,13 +101,9 @@ VALUES
 --   FOREIGN KEY (email) REFERENCES users(email)
 -- );
 
+INSERT INTO topics(name)
+VALUES ('interesting');
 
-CREATE TABLE resources (
-  resource_id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-  resource_name TEXT NOT NULL,
-  resource_URL TEXT NOT NULL,
-  state_abrv TEXT NOT NULL,
-  FOREIGN KEY (state_abrv) REFERENCES states(state_abrv);
-  topics_id TEXT NOT NULL,
-  FOREIGN KEY (topics_id) REFERENCES topics(topics_id);
-);
+
+INSERT INTO resources(resource_name, resource_URL, state_abrv)
+VALUES ('glbtays', 'www.glbtays.org', 'AL');
