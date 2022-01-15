@@ -45,48 +45,6 @@ describe('resources routes', () => {
       });
   });
 
-  it('should update a resource by id', async () => {
-    return request(app)
-      .put('/api/v1/resources/1')
-      .send({
-        resourceId: '1',
-        resourceName: 'glbtays',
-        resourceURL: 'www.glbtays.org',
-        resourceState: 'AL',
-        topicsId: '1',
-      })
-      .then((res) => {
-        expect(res.body).toEqual({
-          resourceId: '1',
-          resourceName: 'glbtays',
-          resourceURL: 'www.glbtays.org',
-          resourceState: 'AL',
-          topicsId: '1',
-        });
-      });
-  });
-
-  it('should get a resource by id', async () => {
-    await Resources.create(newResource);
-    return request(app)
-      .get('/api/v1/resources/1')
-      .then((res) => {
-        expect(res.body).toEqual({
-          resourceId: '1',
-          resourceName: 'glbtays',
-          resourceURL: 'www.glbtays.org',
-          resourceState: 'AL',
-          topicsId: '1',
-        });
-      });
-  });
-
-  it('should delete a resource', async () => {
-    return request(app)
-      .delete('/api/v1/resources/2')
-      .then((res) => expect(res.body).toEqual({}));
-  });
-
   afterAll(() => {
     pool.end();
   });

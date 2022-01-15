@@ -36,8 +36,8 @@ CREATE TABLE resources (
   resource_URL TEXT NOT NULL,
   state_abrv TEXT NOT NULL,
   FOREIGN KEY (state_abrv) REFERENCES states(abrv)
-  -- topics_id TEXT NOT NULL,
-  -- FOREIGN KEY (topics_id) REFERENCES topics(id)
+  topics_id TEXT NOT NULL,
+  FOREIGN KEY (topics_id) REFERENCES topics(id)
   abrv TEXT NOT NULL UNIQUE
 );
 
