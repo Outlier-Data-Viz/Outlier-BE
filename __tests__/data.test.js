@@ -6,7 +6,7 @@ const pool = require('../lib/utils/pool');
 const insertData = {
   data: '01',
   state: 'AL',
-  // topic: 'Total Homeless Population',
+  topic: 'Total Homeless Population',
 };
 
 describe('additional data routes', () => {
@@ -20,9 +20,9 @@ describe('additional data routes', () => {
       .send(insertData);
     expect(res.body).toEqual({
       id: expect.any(String),
-      data: expect.any(Number),
+      data: expect.any(String),
       state: { state: expect.any(String) },
-      // topic: expect.any(String),
+      topic: { topic: expect.any(String) },
     });
   });
 
