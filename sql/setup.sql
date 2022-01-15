@@ -32,9 +32,9 @@ CREATE TABLE favorites (
   id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
   image TEXT NOT NULL,
   user_id BIGINT NOT NULL,
-  FOREIGN KEY (user_id) REFERENCES users(id)
-  -- topic_id BIGINT NOT NULL,
-  -- FOREIGN KEY (topic_id) REFERENCES topics(id)
+  FOREIGN KEY (user_id) REFERENCES users(id),
+  topic_id BIGINT NOT NULL,
+  FOREIGN KEY (topic_id) REFERENCES topics(id)
 );
 
 CREATE TABLE additional_data (
