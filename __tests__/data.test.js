@@ -5,7 +5,7 @@ const pool = require('../lib/utils/pool');
 
 const insertData = {
   data: '01',
-  state: 'NS',
+  state: 'AL',
   // topic: 'Total Homeless Population',
 };
 
@@ -14,13 +14,14 @@ describe('additional data routes', () => {
     await setup(pool);
   });
 
-  xit('posts data to db', async () => {
+  it('posts data to db', async () => {
     const res = await request(app)
       .post('/api/v1/data/create')
       .send(insertData);
     expect(res.body).toEqual({
-      data: expect.any(String),
-      state: expect.any(String),
+      id: expect.any(String),
+      data: expect.any(Number),
+      state: { state: expect.any(String) },
       // topic: expect.any(String),
     });
   });
