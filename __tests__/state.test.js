@@ -5,8 +5,8 @@ const app = require('../lib/app');
 const State = require('../lib/models/State');
 
 const insertState = {
-  stateName: 'Alabama',
-  abrv: 'AL'
+  stateName: 'New State',
+  abrv: 'NS'
 };
 
 describe('state routes', () => {
@@ -17,10 +17,7 @@ describe('state routes', () => {
   it('posts state to db', async () => {
     const res = await request(app)
       .post('/api/v1/state/create')
-      .send({
-        stateName: 'Alabama',
-        abrv: 'AL',
-      });
+      .send(insertState);
     expect(res.body).toEqual({
       ...insertState,
     });
