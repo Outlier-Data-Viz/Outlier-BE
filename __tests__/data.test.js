@@ -2,6 +2,7 @@ const setup = require('../data/setup');
 const app = require('../lib/app');
 const request = require('supertest');
 const pool = require('../lib/utils/pool');
+const Data = require('../lib/models/Data');
 
 const insertData = {
   data: '01',
@@ -26,5 +27,14 @@ describe('additional data routes', () => {
     });
   });
 
+  it('gets all favorites', async () => {
+    await Data.insert(insertData);
+
+    return await request(app)
+      .get('/api/v1/favorite')
+      .then((res) => {
+        expect(res.body).toEqual(expect.any(Array));
+      });
+  });
 });
 
