@@ -15,10 +15,12 @@ describe('state routes', () => {
   });
 
   it('posts state to db', async () => {
-    const res = await request(app).post('/api/v1/state/create').send({
-      stateName: 'Alabama',
-      abrv: 'AL',
-    });
+    const res = await request(app)
+      .post('/api/v1/state/create')
+      .send({
+        stateName: 'Alabama',
+        abrv: 'AL',
+      });
     expect(res.body).toEqual({
       ...insertState,
     });
