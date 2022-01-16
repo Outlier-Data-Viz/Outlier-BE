@@ -34,7 +34,7 @@ CREATE TABLE resources (
   resource_id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
   resource_name TEXT NOT NULL,
   resource_URL TEXT NOT NULL,
-  state_abrv TEXT NOT NULL UNIQUE,
+  state_abrv TEXT NOT NULL,
   FOREIGN KEY (state_abrv) REFERENCES states(abrv),
   topics_id BIGINT,
   FOREIGN KEY (topics_id) REFERENCES topics(id)
@@ -127,8 +127,9 @@ INSERT INTO topics(name)
 VALUES ('interesting');
 
 
-INSERT INTO resources(resource_name, resource_URL, state_abrv)
-VALUES ('glbtays', 'www.glbtays.org', 'AL');
+INSERT INTO resources(resource_name, resource_URL, state_abrv, topics_id)
+VALUES ('glbtays', 'www.glbtays.org', 'AL', '1');
+
 INSERT INTO additional_data( data, state, topic) VALUES
 ('3351', 'AL', 'Total Homeless Population'),
 ('1949', 'AK', 'Total Homeless Population'),
