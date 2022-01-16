@@ -81,5 +81,22 @@ describe('additional data routes', () => {
       ])
     );
   });
+
+  it('deletes data by id and returns obj', async () => {
+    await Data.insert(insertData);
+
+    const res = await request(app).delete('/api/v1/data/1');
+
+    expect(res.body).toEqual({
+      id: expect.any(String),
+      data: expect.any(String),
+      state: { state: expect.any(String) },
+      topic: { topic: expect.any(String) },
+    });
+  });
+
+  afterAll(() => {
+    pool.end();
+  });
 });
 
