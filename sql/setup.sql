@@ -34,11 +34,10 @@ CREATE TABLE resources (
   resource_id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
   resource_name TEXT NOT NULL,
   resource_URL TEXT NOT NULL,
-  state_abrv TEXT NOT NULL,
-  FOREIGN KEY (state_abrv) REFERENCES states(abrv)
-  topics_id TEXT NOT NULL,
+  state_abrv TEXT NOT NULL UNIQUE,
+  FOREIGN KEY (state_abrv) REFERENCES states(abrv),
+  topics_id BIGINT,
   FOREIGN KEY (topics_id) REFERENCES topics(id)
-  abrv TEXT NOT NULL UNIQUE
 );
 
 CREATE TABLE favorites (

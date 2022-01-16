@@ -4,27 +4,28 @@ const request = require('supertest');
 const app = require('../lib/app');
 const Resources = require('../lib/models/Resources');
 
+const insertResource = {
+  resourceName: 'example inc.',
+  resourceURL: 'www.example.org',
+  resourceState: 'AL',
+  topicId: '1' 
+};
+
 describe('resources routes', () => {
-  beforeEach(() => {
-    return setup(pool);
+  beforeEach(async () => {
+    await setup(pool);
   });
-  const newResource = {
-    resourceName: 'identity, inc.',
-    resourceURL: 'www.identityinc.org',
-    resourceState: 'AK',
-  };
 
   it.only('posts new resource to db', () => {
-    return request(app)
-      .post('/api/v1/resources')
-      .send(newResource)
-      .then((res) => {
-        expect(res.body).toEqual([
-          {
-            resourceId: '2',
-            ...newResource,
-          },
-        ]);
+    const res = await request(app)
+      .post('/api/v1/resources/create')
+      .send(insertResource);
+        expect(res.body).toEqual({
+          id: expect.any(String),
+          resourceName: expect.any(String),
+          resourceURL: expect.any(String),
+          topic: {topicId: '1'}
+        });
       });
   });
 
