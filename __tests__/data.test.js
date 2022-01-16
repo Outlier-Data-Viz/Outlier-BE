@@ -7,7 +7,7 @@ const Data = require('../lib/models/Data');
 const insertData = {
   data: '01',
   state: 'AL',
-  topic: 'Total Homeless Population',
+  topic: 'Total_Homeless_Population',
 };
 
 describe('additional data routes', () => {
@@ -50,32 +50,36 @@ describe('additional data routes', () => {
     });
   });
 
-  xit('gets additional data by state', async () => {
-    await Data.insert(insertData);
+  it('gets additional data by state', async () => {
+    const res = await request(app).get('/api/v1/data/state/AL');
 
-    const res = await request(app).get('/api/v1/data/AL');
-
-    expect(res.body).toEqual({
-      id: expect.any(String),
-      data: expect.any(String),
-      state: { state: expect.any(String) },
-      topic: { topic: expect.any(String) },
-    });
+    expect(res.body).toEqual(
+      expect.arrayContaining([
+        {
+          id: expect.any(String),
+          data: expect.any(String),
+          state: { state: expect.any(String) },
+          topic: { topic: expect.any(String) },
+        },
+      ])
+    );
   });
 
-  xit('gets additional data by topic', async () => {
-    await Data.insert(insertData);
-
+  it('gets additional data by topic', async () => {
     const res = await request(app).get(
-      '/api/v1/data/Total%20Homeless%20Population'
+      '/api/v1/data/topic/Total_Homeless_Population'
     );
 
-    expect(res.body).toEqual({
-      id: expect.any(String),
-      data: expect.any(String),
-      state: { state: expect.any(String) },
-      topic: { topic: expect.any(String) },
-    });
+    expect(res.body).toEqual(
+      expect.arrayContaining([
+        {
+          id: expect.any(String),
+          data: expect.any(String),
+          state: { state: expect.any(String) },
+          topic: { topic: expect.any(String) },
+        },
+      ])
+    );
   });
 });
 
