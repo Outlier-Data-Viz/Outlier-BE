@@ -15,7 +15,8 @@ jest.mock('../lib/middleware/ensure-auth', () => {
 });
 
 const testUser = {
-  email: 'test@email.com',  
+  id: 1,
+  email: 'testTwo@email.com',  
 };
 
 describe('user crud routes', () => {
@@ -52,7 +53,7 @@ describe('user crud routes', () => {
           },
           {
             id: expect.any(String),
-            email: 'test@email.com',
+            email: 'testTwo@email.com',
             username: null,
             avatar: null
           }
@@ -61,10 +62,23 @@ describe('user crud routes', () => {
       });
   });
 
-  it('gets user by id', async () => {
+  // it('gets user by id', async () => {
+  //   await User.insert(testUser);
+
+  //   const res = await request(app).get(`/api/v1/users/${testUser.id}`);
+
+  //   expect(res.body).toEqual({
+  //     id: expect.any(String),
+  //     email: 'test@email.com',
+  //     username: null,
+  //     avatar: null
+  //   });
+  // });
+
+  it('gets user by email', async () => {
     await User.insert(testUser);
 
-    const res = await request(app).get('/api/v1/users/1');
+    const res = await request(app).get('/api/v1/users/test@email.com');
 
     expect(res.body).toEqual({
       id: expect.any(String),
