@@ -82,6 +82,42 @@ describe('additional data routes', () => {
     );
   });
 
+  it('gets data by state and topic', async () => {
+    const res = await request(app).get(
+      '/api/v1/data/state&topic/CA&Total_Homeless_Population'
+    );
+
+    expect(res.body).toEqual(
+      expect.arrayContaining([
+        {
+          id: expect.any(String),
+          data: expect.any(String),
+          state: { state: expect.any(String) },
+          topic: { topic: expect.any(String) },
+        },
+      ])
+    );
+  });
+
+  xit('updates data by id and returns obj', async () => {
+    await Data.insert(insertData);
+
+    const res = await request(app)
+      .put('/api/v1/data/1')
+      .send({
+        data: '2',
+        state: 'AL',
+        topic: 'Total_Homeless_Population',
+      });
+
+    expect(res.body).toEqual({
+      id: expect.any(String),
+      data: '2',
+      state: { state: expect.any(String) },
+      topic: { topic: expect.any(String) },
+    });
+  });
+
   it('deletes data by id and returns obj', async () => {
     await Data.insert(insertData);
 
