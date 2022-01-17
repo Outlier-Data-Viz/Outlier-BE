@@ -16,33 +16,47 @@ describe('resources routes', () => {
     await setup(pool);
   });
 
-  it.only('posts new resource to db', async () => {
+  it('posts new resource to db', async () => {
     const res = await request(app)
       .post('/api/v1/resources/create')
       .send(insertResource);
     expect(res.body).toEqual({
       id: expect.any(String),
-      resourceName: expect.any(String),
-      resourceURL: expect.any(String),
-      state: { resourceState: expect.any(String) },
+      resourceName: 'example inc.',
+      resourceURL: 'www.example.org',
+      state: { resourceState: 'AL' },
       topic: { topicId: '1' },
     });
   });
 });
 
 it('should get all resources', async () => {
-  await Resources.create(newResource);
+  // await Resources.insert(insertResource);
   return request(app)
     .get('/api/v1/resources')
     .then((res) => {
       expect(res.body).toEqual([
         {
-          resourceId: '1',
+          id: '1',
           resourceName: 'glbtays',
           resourceURL: 'www.glbtays.org',
-          resourceState: 'AL',
-          topicsId: '1',
+          state: { resourceState: 'AL' },
+          topic: { topicId: '1' },
         },
+        {
+          id: '2',
+          resourceName: 'example inc.',
+          resourceURL: 'www.example.org',
+          state: { resourceState: 'AL' },
+          topic: { topicId: '1' },
+        },
+        // {
+        //   id: '3',
+        //   resourceName: 'example inc.',
+        //   resourceURL: 'www.example.org',
+        //   state: { resourceState: 'AL' },
+        //   topic: { topicId: '1' },
+        // },
       ]);
     });
 });
