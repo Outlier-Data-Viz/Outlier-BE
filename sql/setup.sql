@@ -31,10 +31,10 @@ CREATE TABLE states (
 );
 
 CREATE TABLE resources (
-  resource_id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+  id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
   resource_name TEXT NOT NULL,
   resource_URL TEXT NOT NULL,
-  state_abrv TEXT NOT NULL,
+  state_abrv TEXT,
   FOREIGN KEY (state_abrv) REFERENCES states(abrv),
   topics_id BIGINT,
   FOREIGN KEY (topics_id) REFERENCES topics(id)

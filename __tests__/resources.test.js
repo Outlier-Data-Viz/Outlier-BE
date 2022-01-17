@@ -24,7 +24,7 @@ describe('resources routes', () => {
       id: expect.any(String),
       resourceName: expect.any(String),
       resourceURL: expect.any(String),
-      resourceState: { resourceState: expect.any(String) },
+      state: { resourceState: expect.any(String) },
       topic: { topicId: '1' },
     });
   });
