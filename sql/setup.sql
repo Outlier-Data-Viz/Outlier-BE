@@ -61,6 +61,9 @@ CREATE TABLE additional_data (
 
 INSERT INTO auth (email, password_hash) VALUES('test@email.com', '1234');
 INSERT INTO auth (email, password_hash) VALUES('testTwo@email.com', '4321');
+INSERT INTO auth (email, password_hash) VALUES('testThree@email.com', '4321');
+INSERT INTO users (auth_email) VALUES('test@email.com');
+INSERT INTO users (auth_email) VALUES('testTwo@email.com');
 
 INSERT INTO topics (name) VALUES 
 ('Total Homeless Population'),

@@ -9,7 +9,7 @@ const insertState = {
   abrv: 'NS'
 };
 
-describe.skip('state routes', () => {
+describe('state routes', () => {
   beforeEach(async () => {
     await setup(pool);
   });

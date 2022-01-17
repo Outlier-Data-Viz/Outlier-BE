@@ -8,22 +8,16 @@ const User = require('../lib/models/User');
 jest.mock('../lib/middleware/ensure-auth', () => {
   return (req, res, next) => {
     req.user = {
-      email: 'test@email.com',
+      email: 'testThree@email.com',
     };
     next();
   };
 });
 
-const testUser = {
-  id: 1,
-  authEmail: 'test@email.com',  
+const testThree = {
+  id: 3,
+  authEmail: 'testThree@email.com',  
 };
-
-const testUserTwo = {
-  id: 2,
-  authEmail: 'testTwo@email.com',  
-};
-
 
 describe('user crud routes', () => {
   beforeEach(async () => {
@@ -31,24 +25,25 @@ describe('user crud routes', () => {
   });
 
   it('posts user to db', async () => {
+    // await Auth.insert(testAuth);
     const res = await request(app)
       .post('/api/v1/users/create')
       .send({
-        authEmail: 'test@email.com',
+        authEmail: 'testThree@email.com',
         username: 'user',
         avatar: 'pic.png'
       });
     expect(res.body).toEqual({
       id: expect.any(String),
-      authEmail: 'test@email.com',
+      authEmail: 'testThree@email.com',
       username: 'user',
       avatar: 'pic.png'
     });
   });
 
   it('gets all users from db', async () => {
-    await User.insert(testUser);
-    await User.insert(testUserTwo);
+    
+    // await User.insert(testUserTwo);
     
     return await request(app)
       .get('/api/v1/users')
@@ -71,24 +66,11 @@ describe('user crud routes', () => {
       });
   });
 
-  // it('gets user by id', async () => {
-  //   await User.insert(testUser);
-
-  //   const res = await request(app).get(`/api/v1/users/${testUser.id}`);
-
-  //   expect(res.body).toEqual({
-  //     id: expect.any(String),
-  //     email: 'test@email.com',
-  //     username: null,
-  //     avatar: null
-  //   });
-  // });
-
   it('gets user by email', async () => {
-    await User.insert(testUser);
-    await User.insert(testUserTwo);
+    // await User.insert(testUser);
+    // await User.insert(testUserTwo);
     
-    const res = await request(app).get(`/api/v1/users/${testUser.authEmail}`);
+    const res = await request(app).get('/api/v1/users/test@email.com');
     
     expect(res.body).toEqual({
       id: expect.any(String),
@@ -99,11 +81,11 @@ describe('user crud routes', () => {
   });
   
   it('updates a user by id', async () => {
-    await User.insert(testUser);
-    await User.insert(testUserTwo);
+    await User.insert(testThree);
+    // await User.insert(testUserTwo);
 
     const res = await request(app)
-      .patch(`/api/v1/users/${testUser.id}`)
+      .patch(`/api/v1/users/${testThree.id}`)
       .send({
         username: 'test-user-patch',
         avatar: 'test-2.png',
@@ -111,27 +93,27 @@ describe('user crud routes', () => {
 
     expect(res.body).toEqual({
       id: expect.any(String),
-      authEmail: 'test@email.com',
+      authEmail: 'testThree@email.com',
       username: 'test-user-patch',
       avatar: 'test-2.png',
     });
   });
     
   it('deletes user && returns deleted obj', async () => {
-    await User.insert(testUser);
+    await User.insert(testThree);
       
     await request(app)
-      .patch(`/api/v1/users/${testUser.id}`)
+      .patch('/api/v1/users/3')
       .send({
         username: 'test-user-updated',
         avatar: 'test-3.png',
       });
     const res = await request(app)
-      .delete('/api/v1/users/1');
+      .delete('/api/v1/users/3');
 
     expect(res.body).toEqual({
       id: expect.any(String),
-      authEmail: 'test@email.com',
+      authEmail: 'testThree@email.com',
       username: 'test-user-updated',
       avatar: 'test-3.png',
     });
