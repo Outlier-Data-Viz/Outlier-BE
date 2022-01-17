@@ -1,20 +1,21 @@
--- DROP TABLE IF EXISTS auth CASCADE;
+DROP TABLE IF EXISTS auth CASCADE;
 DROP TABLE IF EXISTS users CASCADE;
 DROP TABLE IF EXISTS topics CASCADE;
 DROP TABLE IF EXISTS states;
 DROP TABLE IF EXISTS favorites CASCADE;
 
--- CREATE TABLE auth (
---   id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
---   email TEXT NOT NULL UNIQUE,
---   password_hash TEXT NOT NULL
--- );
+CREATE TABLE auth (
+  id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+  email TEXT NOT NULL UNIQUE,
+  password_hash TEXT NOT NULL
+);
 
 CREATE TABLE users (
   id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-  email TEXT NOT NULL UNIQUE,
+  auth_email TEXT NOT NULL UNIQUE,
   username TEXT,
-  avatar TEXT
+  avatar TEXT,
+  FOREIGN KEY (auth_email) REFERENCES auth(email)
 );
 
 CREATE TABLE topics (
@@ -37,7 +38,8 @@ CREATE TABLE favorites (
 );
 
 
-INSERT INTO users (email) VALUES('test@email.com');
+INSERT INTO auth (email, password_hash) VALUES('test@email.com', '1234');
+INSERT INTO auth (email, password_hash) VALUES('testTwo@email.com', '4321');
 
 INSERT INTO states (state_name, abrv) 
 VALUES
