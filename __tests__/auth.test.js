@@ -14,7 +14,7 @@ const setup = require('../data/setup');
 //   password: 'password'
 // };
 
-describe('crud for user', () => {
+describe.skip('crud for user', () => {
   beforeEach(() => {
     return setup(pool);
   });
@@ -49,35 +49,35 @@ describe('crud for user', () => {
 
   // it('ensures login credentials exist', async () => {
   //   await UserService.createUser(testUser);
-    
+
   //   const res = await request(app)
   //   .post('/api/v1/auth/login')
   //   .send(badUser);
-    
+
   //   expect(res.body).toEqual({
   //     message: 'Invalid email/password',
   //     status: 401
   //   });
   // });
-  
+
   // it('gets currently logged user at /profile', async () => {
   //   await UserService.createUser({
   //     email: 'test@email.com',
   //     password: 'password',
   //   });
-    
+
   //   const agent = request.agent(app);
-    
+
   //   await agent
   //   .post('/api/v1/auth/login')
   //   .send({
   //     email: 'test@email.com',
   //     password: 'password',
   //   })
-    
+
   //   const res = await agent
   //   .get('/api/v1/auth/profile');
-    
+
   //   console.log(res.body);
   //   expect(res.body).toEqual({
   //     id: expect.any(String),

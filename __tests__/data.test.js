@@ -10,15 +10,13 @@ const insertData = {
   topic: 'Total Homeless Population',
 };
 
-describe('additional data routes', () => {
+describe.skip('additional data routes', () => {
   beforeEach(async () => {
     await setup(pool);
   });
 
   it('posts data to db', async () => {
-    const res = await request(app)
-      .post('/api/v1/data/create')
-      .send(insertData);
+    const res = await request(app).post('/api/v1/data/create').send(insertData);
     expect(res.body).toEqual({
       id: expect.any(String),
       data: expect.any(String),
@@ -50,4 +48,3 @@ describe('additional data routes', () => {
     });
   });
 });
-

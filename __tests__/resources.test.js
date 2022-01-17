@@ -54,6 +54,29 @@ it('should get all resources', () => {
     });
 });
 
+it('should get all resources by state', () => {
+  return request(app)
+    .get('/api/v1/resources/AL')
+    .then((res) => {
+      expect(res.body).toEqual([
+        {
+          id: '1',
+          resourceName: 'glbtays',
+          resourceUrl: 'www.glbtays.org',
+          state: { resourceState: 'AL' },
+          topic: { topicId: '1' },
+        },
+        {
+          id: '2',
+          resourceName: 'example inc.',
+          resourceUrl: 'www.example.org',
+          state: { resourceState: 'AL' },
+          topic: { topicId: '1' },
+        },
+      ]);
+    });
+});
+
 afterAll(() => {
   pool.end();
 });

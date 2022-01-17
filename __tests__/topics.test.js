@@ -5,24 +5,22 @@ const app = require('../lib/app');
 const Topic = require('../lib/models/Topics');
 
 const testTopic = {
-  name: 'interesting'
+  name: 'interesting',
 };
 
-describe('topic crud routes', () => {
+describe.skip('topic crud routes', () => {
   beforeEach(async () => {
     await setup(pool);
   });
 
   it('posts topic to db', async () => {
-    const res = await request(app)
-      .post('/api/v1/topics/create')
-      .send({
-        name: 'interesting'        
-      });
-    
+    const res = await request(app).post('/api/v1/topics/create').send({
+      name: 'interesting',
+    });
+
     expect(res.body).toEqual({
       id: expect.any(String),
-      name: 'interesting'
+      name: 'interesting',
     });
   });
 
@@ -43,19 +41,18 @@ describe('topic crud routes', () => {
 
     expect(res.body).toEqual({
       id: expect.any(String),
-      name: 'interesting'
+      name: 'interesting',
     });
   });
 
   it('deletes topic by id && returns obj', async () => {
     await Topic.insert(testTopic);
 
-    const res = await request(app)
-      .delete('/api/v1/topics/5');
+    const res = await request(app).delete('/api/v1/topics/5');
 
     expect(res.body).toEqual({
       id: expect.any(String),
-      name: 'interesting'
+      name: 'interesting',
     });
   });
 

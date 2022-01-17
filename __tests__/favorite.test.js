@@ -7,10 +7,10 @@ const Favorite = require('../lib/models/Favorite');
 const insertFavorite = {
   image: 'example.png',
   userId: '1',
-  topicId: '1'
+  topicId: '1',
 };
 
-describe('favorites routes', () => {
+describe.skip('favorites routes', () => {
   beforeEach(async () => {
     await setup(pool);
   });
@@ -23,7 +23,7 @@ describe('favorites routes', () => {
       id: expect.any(String),
       image: expect.any(String),
       user: { userId: expect.any(String) },
-      topic: { topicId: '1' }
+      topic: { topicId: '1' },
     });
   });
 
@@ -46,22 +46,20 @@ describe('favorites routes', () => {
       id: expect.any(String),
       image: expect.any(String),
       user: { userId: expect.any(String) },
-      topic: { topicId: '1' }
-
+      topic: { topicId: '1' },
     });
   });
 
   it('deletes favorite by id and returns obj', async () => {
     await Favorite.insert(insertFavorite);
 
-    const res = await request(app)
-      .delete('/api/v1/favorite/1');
-    
+    const res = await request(app).delete('/api/v1/favorite/1');
+
     expect(res.body).toEqual({
       id: expect.any(String),
       image: expect.any(String),
       user: { userId: expect.any(String) },
-      topic: { topicId: '1' }
+      topic: { topicId: '1' },
     });
   });
 
