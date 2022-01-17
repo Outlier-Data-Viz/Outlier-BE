@@ -1,21 +1,23 @@
--- DROP TABLE IF EXISTS auth CASCADE;
+DROP TABLE IF EXISTS auth CASCADE;
 DROP TABLE IF EXISTS users CASCADE;
 DROP TABLE IF EXISTS topics CASCADE;
 DROP TABLE IF EXISTS states CASCADE;
+DROP TABLE IF EXISTS resources; 
 DROP TABLE IF EXISTS favorites CASCADE;
 DROP TABLE IF EXISTS additional_data CASCADE;
 
--- CREATE TABLE auth (
---   id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
---   email TEXT NOT NULL UNIQUE,
---   password_hash TEXT NOT NULL
--- );
+CREATE TABLE auth (
+  id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+  email TEXT NOT NULL UNIQUE,
+  password_hash TEXT NOT NULL
+);
 
 CREATE TABLE users (
   id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-  email TEXT NOT NULL,
+  auth_email TEXT NOT NULL UNIQUE,
   username TEXT,
-  avatar TEXT
+  avatar TEXT,
+  FOREIGN KEY (auth_email) REFERENCES auth(email)
 );
 
 CREATE TABLE topics (
@@ -23,9 +25,20 @@ CREATE TABLE topics (
   name TEXT NOT NULL UNIQUE
 );
 
+
 CREATE TABLE states (
   state_name TEXT NOT NULL PRIMARY KEY,
-  abrv TEXT NOT NULL UNIQUE
+  abrv TEXT UNIQUE NOT NULL
+);
+
+CREATE TABLE resources (
+  id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+  resource_name TEXT NOT NULL,
+  resource_url TEXT NOT NULL,
+  state_abrv TEXT,
+  topics_id BIGINT,
+  FOREIGN KEY (state_abrv) REFERENCES states(abrv),
+  FOREIGN KEY (topics_id) REFERENCES topics(id)
 );
 
 CREATE TABLE favorites (
@@ -42,7 +55,11 @@ CREATE TABLE additional_data (
   topic TEXT NOT NULL REFERENCES topics(name)
 );
 
-INSERT INTO users (email) VALUES('test@email.com');
+INSERT INTO auth (email, password_hash) VALUES('test@email.com', '1234');
+INSERT INTO auth (email, password_hash) VALUES('testTwo@email.com', '4321');
+INSERT INTO auth (email, password_hash) VALUES('testThree@email.com', '4321');
+INSERT INTO users (auth_email) VALUES('test@email.com');
+INSERT INTO users (auth_email) VALUES('testTwo@email.com');
 
 INSERT INTO topics (name) VALUES 
 ('Total_Homeless_Population'),
@@ -100,6 +117,19 @@ INSERT INTO states (state_name, abrv) VALUES ('alabama', 'AL'),
 ('west virginia', 'WV'),
 ('wisconsin', 'WI'),
 ('wyoming', 'WY');
+
+-- CREATE TABLE favorites (
+--   id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+--   email TEXT NOT NULL,
+--   FOREIGN KEY (email) REFERENCES users(email)
+-- );
+
+INSERT INTO topics(name)
+VALUES ('interesting');
+
+
+INSERT INTO resources(resource_name, resource_URL, state_abrv, topics_id)
+VALUES ('glbtays', 'www.glbtays.org', 'AL', '1');
 
 INSERT INTO additional_data( data, state, topic) VALUES
 ('3351', 'AL', 'Total_Homeless_Population'),
