@@ -5,8 +5,9 @@ const app = require('../lib/app');
 const Resources = require('../lib/models/Resources');
 
 const insertResource = {
+  id: '2',
   resourceName: 'example inc.',
-  resourceURL: 'www.example.org',
+  resourceUrl: 'www.example.org',
   resourceState: 'AL',
   topicId: '1',
 };
@@ -16,32 +17,38 @@ describe('resources routes', () => {
     await setup(pool);
   });
 
-  it.only('posts new resource to db', async () => {
+  it('posts new resource to db', async () => {
     const res = await request(app)
       .post('/api/v1/resources/create')
       .send(insertResource);
     expect(res.body).toEqual({
       id: expect.any(String),
       resourceName: expect.any(String),
-      resourceURL: expect.any(String),
+      resourceUrl: expect.any(String),
       state: { resourceState: expect.any(String) },
       topic: { topicId: '1' },
     });
   });
 });
 
-it('should get all resources', async () => {
-  await Resources.create(newResource);
+it('should get all resources', () => {
   return request(app)
     .get('/api/v1/resources')
     .then((res) => {
       expect(res.body).toEqual([
         {
-          resourceId: '1',
+          id: '1',
           resourceName: 'glbtays',
-          resourceURL: 'www.glbtays.org',
-          resourceState: 'AL',
-          topicsId: '1',
+          resourceUrl: 'www.glbtays.org',
+          state: { resourceState: expect.any(String) },
+          topic: { topicId: '1' },
+        },
+        {
+          id: '2',
+          resourceName: 'example inc.',
+          resourceUrl: 'www.example.org',
+          state: { resourceState: expect.any(String) },
+          topic: { topicId: '1' },
         },
       ]);
     });

@@ -33,7 +33,7 @@ CREATE TABLE states (
 CREATE TABLE resources (
   id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
   resource_name TEXT NOT NULL,
-  resource_URL TEXT NOT NULL,
+  resource_url TEXT NOT NULL,
   state_abrv TEXT,
   FOREIGN KEY (state_abrv) REFERENCES states(abrv),
   topics_id BIGINT,
@@ -127,7 +127,7 @@ INSERT INTO topics(name)
 VALUES ('interesting');
 
 
-INSERT INTO resources(resource_name, resource_URL, state_abrv, topics_id)
+INSERT INTO resources(resource_name, resource_url, state_abrv, topics_id)
 VALUES ('glbtays', 'www.glbtays.org', 'AL', '1');
 
 INSERT INTO additional_data( data, state, topic) VALUES
