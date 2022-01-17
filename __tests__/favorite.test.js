@@ -10,7 +10,7 @@ const insertFavorite = {
   topicId: '1',
 };
 
-describe.skip('favorites routes', () => {
+describe('favorites routes', () => {
   beforeEach(async () => {
     await setup(pool);
   });

@@ -10,7 +10,7 @@ const insertData = {
   topic: 'Total Homeless Population',
 };
 
-describe.skip('additional data routes', () => {
+describe('additional data routes', () => {
   beforeEach(async () => {
     await setup(pool);
   });

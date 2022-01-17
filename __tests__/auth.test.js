@@ -14,7 +14,7 @@ const setup = require('../data/setup');
 //   password: 'password'
 // };
 
-describe.skip('crud for user', () => {
+describe('crud for user', () => {
   beforeEach(() => {
     return setup(pool);
   });
