@@ -7,7 +7,7 @@ const Favorite = require('../lib/models/Favorite');
 const insertFavorite = {
   image: 'example.png',
   userId: '1',
-  // topicId: '1'
+  topicId: '1'
 };
 
 describe.skip('favorites routes', () => {
@@ -23,7 +23,7 @@ describe.skip('favorites routes', () => {
       id: expect.any(String),
       image: expect.any(String),
       user: { userId: expect.any(String) },
-      // topic: { topicId: expect.any(String) }
+      topic: { topicId: '1' }
     });
   });
 
@@ -45,7 +45,9 @@ describe.skip('favorites routes', () => {
     expect(res.body).toEqual({
       id: expect.any(String),
       image: expect.any(String),
-      user: { userId: expect.any(String) }
+      user: { userId: expect.any(String) },
+      topic: { topicId: '1' }
+
     });
   });
 
@@ -58,7 +60,8 @@ describe.skip('favorites routes', () => {
     expect(res.body).toEqual({
       id: expect.any(String),
       image: expect.any(String),
-      user: { userId: expect.any(String) }
+      user: { userId: expect.any(String) },
+      topic: { topicId: '1' }
     });
   });
 
