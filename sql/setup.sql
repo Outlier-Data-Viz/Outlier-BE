@@ -336,3 +336,5 @@ INSERT INTO additional_data( data, state, topic) VALUES
 ('22', 'WV', 'Percentage of LGBT Population in Poverty'),
 ('16', 'WI', 'Percentage of LGBT Population in Poverty'),
 ('27', 'WY', 'Percentage of LGBT Population in Poverty');
+
+
