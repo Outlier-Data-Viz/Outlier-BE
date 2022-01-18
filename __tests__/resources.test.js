@@ -11,7 +11,7 @@ const insertResource = {
   topicId: '1',
 };
 
-describe.skip('resources routes', () => {
+describe('resources routes', () => {
   beforeEach(async () => {
     await setup(pool);
   });
