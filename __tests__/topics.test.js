@@ -8,7 +8,7 @@ const testTopic = {
   name: 'test-interesting'
 };
 
-describe('topic crud routes', () => {
+describe.skip('topic crud routes', () => {
   beforeEach(async () => {
     await setup(pool);
   });
