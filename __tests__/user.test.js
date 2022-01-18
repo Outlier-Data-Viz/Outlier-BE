@@ -70,7 +70,8 @@ describe('user crud routes', () => {
     // await User.insert(testUser);
     // await User.insert(testUserTwo);
     
-    const res = await request(app).get('/api/v1/users/test@email.com');
+    const res = await request(app)
+      .get('/api/v1/users/test@email.com');
     
     expect(res.body).toEqual({
       id: expect.any(String),
