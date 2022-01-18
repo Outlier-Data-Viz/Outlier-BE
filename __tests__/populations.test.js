@@ -3,7 +3,7 @@ const setup = require('../data/setup');
 const request = require('supertest');
 const app = require('../lib/app');
 
-describe.skip('population get routes', () => {
+describe('population get routes', () => {
   beforeEach(async () => {
     await setup(pool);
   });
@@ -25,7 +25,9 @@ describe.skip('population get routes', () => {
       total: '4903185',
       lgbt: '117000',
       aa: '1296162',
-      latinx: '264067'
+      latinx: '264067',
+      homeless: '3351',
+      lgbtPoverty: null
     });
   });
 });
