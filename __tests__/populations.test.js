@@ -3,7 +3,7 @@ const setup = require('../data/setup');
 const request = require('supertest');
 const app = require('../lib/app');
 
-describe('population get routes', () => {
+describe.skip('population get routes', () => {
   beforeEach(async () => {
     await setup(pool);
   });

@@ -19,7 +19,7 @@ const testThree = {
   authEmail: 'testThree@email.com',  
 };
 
-describe('user crud routes', () => {
+describe.skip('user crud routes', () => {
   beforeEach(async () => {
     await setup(pool);
   });
