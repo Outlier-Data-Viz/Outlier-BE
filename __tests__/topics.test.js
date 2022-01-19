@@ -8,7 +8,7 @@ const testTopic = {
   name: 'test-interesting'
 };
 
-describe.skip('topic crud routes', () => {
+describe('topic crud routes', () => {
   beforeEach(async () => {
     await setup(pool);
   });
@@ -37,25 +37,23 @@ describe.skip('topic crud routes', () => {
   });
 
   it('gets topic by id', async () => {
-    // await Topic.insert(testTopic);
 
     const res = await request(app).get('/api/v1/topics/5');
 
     expect(res.body).toEqual({
       id: expect.any(String),
-      name: 'interesting'
+      name: 'Mental Health'
     });
   });
 
   it('deletes topic by id && returns obj', async () => {
-    // await Topic.insert(testTopic);
 
     const res = await request(app)
       .delete('/api/v1/topics/5');
 
     expect(res.body).toEqual({
       id: expect.any(String),
-      name: 'interesting'
+      name: 'Mental Health'
     });
   });
 
