@@ -5,6 +5,7 @@ DROP TABLE IF EXISTS populations CASCADE;
 DROP TABLE IF EXISTS topics CASCADE;
 DROP TABLE IF EXISTS favorites CASCADE;
 DROP TABLE IF EXISTS resources CASCADE; 
+DROP TABLE IF EXISTS hate_crime_stats; 
 
 CREATE TABLE auth (
   id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
@@ -57,6 +58,13 @@ CREATE TABLE populations (
   houseless NUMERIC,
   poverty NUMERIC,
   FOREIGN KEY (state_abrv) REFERENCES states(abrv)
+);
+
+CREATE TABLE hate_crime_stats (
+  id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+  data_year NUMERIC,
+  key TEXT,
+  value NUMERIC
 );
 
 INSERT INTO auth (email, password_hash) VALUES('test@email.com', '1234');
