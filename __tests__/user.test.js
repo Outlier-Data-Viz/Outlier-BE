@@ -25,7 +25,6 @@ describe('user crud routes', () => {
   });
 
   it('posts user to db', async () => {
-    // await Auth.insert(testAuth);
     const res = await request(app)
       .post('/api/v1/users/create')
       .send({
@@ -41,10 +40,7 @@ describe('user crud routes', () => {
     });
   });
 
-  it('gets all users from db', async () => {
-    
-    // await User.insert(testUserTwo);
-    
+  it('gets all users from db', async () => {    
     return await request(app)
       .get('/api/v1/users')
       .then((res) => {
@@ -66,10 +62,7 @@ describe('user crud routes', () => {
       });
   });
 
-  it('gets user by email', async () => {
-    // await User.insert(testUser);
-    // await User.insert(testUserTwo);
-    
+  it('gets user by email', async () => {    
     const res = await request(app)
       .get('/api/v1/users/test@email.com');
     
@@ -83,7 +76,6 @@ describe('user crud routes', () => {
   
   it('updates a user by id', async () => {
     await User.insert(testThree);
-    // await User.insert(testUserTwo);
 
     const res = await request(app)
       .patch(`/api/v1/users/${testThree.id}`)

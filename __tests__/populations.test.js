@@ -24,9 +24,9 @@ describe('population get routes', () => {
       stateAbrv: 'AL',
       total: '4903185',
       lgbt: '117000',
-      aa: '1296162',
+      black: '1296162',
       latinx: '264067',
-      homeless: '3351',
+      houseless: '3351',
       lgbtPoverty: null
     });
   });
