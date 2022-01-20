@@ -64,7 +64,8 @@ CREATE TABLE hate_crime_stats (
   id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
   data_year TEXT,
   key TEXT,
-  value TEXT
+  value TEXT,
+  state TEXT
 );
 
 INSERT INTO auth (email, password_hash) VALUES('test@email.com', '1234');
