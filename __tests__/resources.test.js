@@ -23,8 +23,8 @@ describe('resources routes', () => {
       id: expect.any(String),
       resourceName: 'example inc.',
       resourceURL: 'www.example.org',
-      state: { resourceState: 'AL' },
-      topic: { topicId: '1' },
+      resourceState: 'AL',
+      topicId: '1',
     });
   });
 });
