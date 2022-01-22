@@ -3,11 +3,7 @@ const app = require('../lib/app');
 const request = require('supertest');
 const pool = require('../lib/utils/pool');
 
-const insertStat = {
-  year: '2000',
-  key: 'bias',
-  value: '100',
-};
+const insertStat = [{ state: 'MN', key:'Anit-Mormon', year: '2020' }];
 
 describe('additional stats routes', () => {
   beforeEach(async () => {
@@ -16,14 +12,16 @@ describe('additional stats routes', () => {
 
   xit('posts stats to db', async () => {
     const res = await request(app)
-      .post('/api/v1/data/create')
+      .post('/api/v1/stats/create')
+      .send(insertStat)
       .send(insertStat);
-    expect(res.body).toEqual({
+    expect(res.body).toEqual([{
       id: expect.any(String),
-      year: expect.any(String),
-      key: { state: expect.any(String) },
-      value: { topic: expect.any(String) },
-    });
+      year: '2000',
+      key: 'bias',
+      value: '100',
+      state: 'MN'
+    }]);
   });
 
   xit('gets stats by key and year', async () => {
