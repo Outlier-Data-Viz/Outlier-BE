@@ -74,7 +74,7 @@ INSERT INTO auth (email, password_hash) VALUES('testThree@email.com', '4321');
 INSERT INTO users (auth_email) VALUES('test@email.com');
 INSERT INTO users (auth_email) VALUES('testTwo@email.com');
 
-
+-- This is a TON of data to seed!
 INSERT INTO states (state_name, abrv) VALUES ('alabama', 'AL'),
 ('alaska', 'AK'),
 ('arizona', 'AZ'),
